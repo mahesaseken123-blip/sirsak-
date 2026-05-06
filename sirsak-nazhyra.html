@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pohon Sirsak — Nazhyra Malikka</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1b4332;
+    --green-mid: #2d6a4f;
+    --green-bright: #52b788;
+    --green-light: #95d5b2;
+    --cream: #f8f4e8;
+    --yellow: #f4c842;
+    --text: #1a2e22;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--green-deep);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 24px 80px;
+    text-align: center;
+  }
+
+  /* leaf decorations */
+  .leaf {
+    position: absolute;
+    width: 180px;
+    opacity: 0.12;
+    animation: sway 6s ease-in-out infinite;
+  }
+  .leaf-1 { top: -30px; left: -40px; transform: rotate(-30deg); animation-delay: 0s; }
+  .leaf-2 { top: 10px; right: -50px; transform: rotate(40deg); animation-delay: 1s; }
+  .leaf-3 { bottom: -40px; left: 60px; transform: rotate(15deg); animation-delay: 2s; }
+  .leaf-4 { bottom: 20px; right: 30px; transform: rotate(-20deg); animation-delay: 1.5s; }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(var(--r, -30deg)) scale(1); }
+    50% { transform: rotate(calc(var(--r, -30deg) + 8deg)) scale(1.04); }
+  }
+
+  .hero-badge {
+    background: var(--yellow);
+    color: var(--green-deep);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+  }
+
+  .hero-emoji {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 16px;
+    animation: popIn 0.7s cubic-bezier(.34,1.56,.64,1) 0.1s both;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+  }
+
+  .hero h1 {
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: #fff;
+    line-height: 0.95;
+    margin-bottom: 10px;
+    animation: slideUp 0.7s ease 0.2s both;
+  }
+
+  .hero h1 span { color: var(--green-light); }
+
+  .hero .latin {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--green-light);
+    opacity: 0.8;
+    margin-bottom: 30px;
+    animation: slideUp 0.7s ease 0.3s both;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.75);
+    animation: slideUp 0.7s ease 0.4s both;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.5;
+    animation: bounce 2s infinite;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--green-light);
+    text-transform: uppercase;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--yellow);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 140px;
+    padding: 18px 20px;
+    text-align: center;
+    border-right: 2px solid rgba(0,0,0,0.08);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat .num {
+    font-family: 'Abril Fatface', serif;
+    font-size: 1.8rem;
+    color: var(--green-deep);
+    display: block;
+  }
+
+  .stat .lbl {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    font-weight: 700;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 64px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green-deep);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+  }
+
+  .section h2 {
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--green-deep);
+    margin-bottom: 18px;
+    line-height: 1.1;
+  }
+
+  .section p {
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: #3a4a3e;
+    margin-bottom: 14px;
+  }
+
+  /* ── KLASIFIKASI CARD ── */
+  .klasifikasi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .klas-item {
+    background: var(--green-deep);
+    border-radius: 16px;
+    padding: 18px 16px;
+    color: #fff;
+    transition: transform 0.2s;
+  }
+
+  .klas-item:hover { transform: translateY(-4px); }
+
+  .klas-item .k-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 6px;
+  }
+
+  .klas-item .k-val {
+    font-size: 0.92rem;
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  /* ── MANFAAT ── */
+  .manfaat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .manfaat-card {
+    background: #fff;
+    border: 2px solid var(--green-light);
+    border-radius: 18px;
+    padding: 22px 18px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .manfaat-card:hover {
+    border-color: var(--green-bright);
+    transform: translateY(-4px);
+  }
+
+  .manfaat-card .icon { font-size: 2rem; margin-bottom: 10px; }
+
+  .manfaat-card h3 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .manfaat-card p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #5a6e5e;
+    margin: 0;
+  }
+
+  /* ── FAKTA MENARIK ── */
+  .fakta-section {
+    background: var(--green-deep);
+    padding: 64px 24px;
+    color: #fff;
+  }
+
+  .fakta-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .fakta-inner .section-tag {
+    background: rgba(149,213,178,0.2);
+    color: var(--green-light);
+  }
+
+  .fakta-inner h2 {
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .fakta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .fakta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(255,255,255,0.06);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 14px 14px 0;
+    padding: 16px 20px;
+    transition: background 0.2s;
+  }
+
+  .fakta-item:hover { background: rgba(255,255,255,0.1); }
+
+  .fakta-item .f-num {
+    font-family: 'Abril Fatface', serif;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    min-width: 32px;
+    line-height: 1;
+  }
+
+  .fakta-item p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    margin: 0;
+  }
+
+  /* ── DIVIDER ── */
+  .wave-divider {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .wave-divider svg { display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-deep);
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .footer-card {
+    display: inline-block;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(149,213,178,0.2);
+    border-radius: 20px;
+    padding: 24px 40px;
+  }
+
+  .footer-card .emoji { font-size: 2rem; margin-bottom: 8px; }
+
+  .footer-card .name {
+    font-family: 'Abril Fatface', serif;
+    font-size: 1.5rem;
+    color: var(--green-light);
+    margin-bottom: 4px;
+  }
+
+  .footer-card .kelas {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Leaf SVG decorations -->
+  <svg class="leaf leaf-1" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 280 C20 200 0 100 60 20 C80 60 120 100 140 160 C160 220 120 260 100 280Z" fill="#52b788"/>
+    <line x1="100" y1="280" x2="80" y2="60" stroke="#52b788" stroke-width="3"/>
+  </svg>
+  <svg class="leaf leaf-2" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 280 C20 200 0 100 60 20 C80 60 120 100 140 160 C160 220 120 260 100 280Z" fill="#52b788"/>
+  </svg>
+  <svg class="leaf leaf-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 280 C20 200 0 100 60 20 C80 60 120 100 140 160 C160 220 120 260 100 280Z" fill="#52b788"/>
+  </svg>
+  <svg class="leaf leaf-4" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 280 C20 200 0 100 60 20 C80 60 120 100 140 160 C160 220 120 260 100 280Z" fill="#52b788"/>
+  </svg>
+
+  <div class="hero-badge">🌿 Tanaman Tropis</div>
+  <div class="hero-emoji">🍈</div>
+  <h1>Pohon<br><span>Sirsak</span></h1>
+  <p class="latin">Annona muricata L.</p>
+  <p class="hero-desc">
+    Tanaman buah tropis yang kaya manfaat — dari buahnya yang manis-asam menyegarkan hingga daunnya yang terkenal dalam dunia pengobatan tradisional.
+  </p>
+
+  <div class="scroll-hint">
+    <span>Gulir ke bawah</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 10.5L2.5 5h11L8 10.5z"/></svg>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="num">4–8m</span>
+    <span class="lbl">Tinggi Pohon</span>
+  </div>
+  <div class="stat">
+    <span class="num">±5kg</span>
+    <span class="lbl">Berat Buah</span>
+  </div>
+  <div class="stat">
+    <span class="num">65+</span>
+    <span class="lbl">Senyawa Aktif</span>
+  </div>
+  <div class="stat">
+    <span class="num">12bln</span>
+    <span class="lbl">Berbuah Sepanjang Tahun</span>
+  </div>
+</div>
+
+<!-- DESKRIPSI -->
+<div class="section reveal">
+  <span class="section-tag">📖 Tentang Tanaman</span>
+  <h2>Deskripsi Pohon Sirsak</h2>
+  <p>
+    Pohon Sirsak (<em>Annona muricata</em> L.) adalah tanaman buah tropis yang berasal dari kawasan Amerika Tengah dan Amerika Selatan, namun kini telah menyebar ke seluruh wilayah tropis di dunia, termasuk Indonesia. Di Indonesia, sirsak dikenal dengan berbagai nama daerah seperti <strong>nangka sabrang</strong> (Jawa), <strong>nangka landa</strong> (Sunda), dan <strong>sirsak</strong> (umum).
+  </p>
+  <p>
+    Pohon ini termasuk dalam keluarga <em>Annonaceae</em> dan tumbuh dengan tinggi antara 4 hingga 8 meter. Daunnya berwarna hijau tua mengkilap, berbentuk lonjong, dan mengeluarkan aroma khas ketika diremas. Bunganya berwarna kuning kehijauan, berbentuk segitiga, dan tumbuh langsung dari batang maupun cabang pohon.
+  </p>
+  <p>
+    Buah sirsak berbentuk oval hingga lonjong tidak beraturan, diselimuti duri-duri lunak berwarna hijau di bagian luar. Daging buahnya berwarna putih, berserat halus, berair banyak, dan memiliki cita rasa manis-asam yang sangat khas dan menyegarkan. Satu buah sirsak dewasa bisa mencapai berat 1 hingga 5 kilogram.
+  </p>
+</div>
+
+<!-- KLASIFIKASI -->
+<div class="section reveal" style="padding-top: 0;">
+  <span class="section-tag">🔬 Klasifikasi Ilmiah</span>
+  <h2>Taksonomi</h2>
+  <div class="klasifikasi-grid">
+    <div class="klas-item"><div class="k-label">Kingdom</div><div class="k-val">Plantae</div></div>
+    <div class="klas-item"><div class="k-label">Divisi</div><div class="k-val">Magnoliophyta</div></div>
+    <div class="klas-item"><div class="k-label">Kelas</div><div class="k-val">Magnoliopsida</div></div>
+    <div class="klas-item"><div class="k-label">Ordo</div><div class="k-val">Magnoliales</div></div>
+    <div class="klas-item"><div class="k-label">Famili</div><div class="k-val">Annonaceae</div></div>
+    <div class="klas-item"><div class="k-label">Genus</div><div class="k-val">Annona</div></div>
+    <div class="klas-item"><div class="k-label">Spesies</div><div class="k-val">A. muricata L.</div></div>
+  </div>
+</div>
+
+<!-- MANFAAT -->
+<div class="section reveal" style="padding-top: 0;">
+  <span class="section-tag">💚 Manfaat</span>
+  <h2>Kegunaan & Manfaat</h2>
+  <div class="manfaat-grid">
+    <div class="manfaat-card">
+      <div class="icon">🍹</div>
+      <h3>Pangan & Minuman</h3>
+      <p>Buah sirsak dikonsumsi langsung atau diolah menjadi jus, es krim, selai, dan sirup yang menyegarkan.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="icon">🌿</div>
+      <h3>Obat Tradisional</h3>
+      <p>Daun sirsak secara tradisional digunakan untuk membantu mengatasi diabetes, hipertensi, dan gangguan tidur.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="icon">🔬</div>
+      <h3>Riset Medis</h3>
+      <p>Kandungan <em>acetogenin</em> pada daun sirsak aktif diteliti karena potensi sifat antioksidan dan antitumor-nya.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="icon">🌱</div>
+      <h3>Pestisida Alami</h3>
+      <p>Biji sirsak mengandung senyawa yang bersifat insektisida alami, digunakan untuk mengusir hama tanaman.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="icon">💆</div>
+      <h3>Kesehatan Kulit</h3>
+      <p>Ekstrak daun sirsak digunakan dalam produk perawatan kulit karena sifat antiinflamasi dan antibakterinya.</p>
+    </div>
+    <div class="manfaat-card">
+      <div class="icon">🫁</div>
+      <h3>Imunitas Tubuh</h3>
+      <p>Buah sirsak kaya Vitamin C yang berperan penting dalam meningkatkan daya tahan tubuh dan mencegah radikal bebas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAKTA MENARIK -->
+<div class="fakta-section">
+  <div class="fakta-inner reveal">
+    <span class="section-tag">⚡ Fakta</span>
+    <h2>Fakta Menarik Sirsak</h2>
+    <div class="fakta-list">
+      <div class="fakta-item">
+        <div class="f-num">01</div>
+        <p>Pohon sirsak bisa berbuah sepanjang tahun tanpa mengenal musim, menjadikannya salah satu tanaman buah paling produktif di daerah tropis.</p>
+      </div>
+      <div class="fakta-item">
+        <div class="f-num">02</div>
+        <p>Nama "sirsak" dalam bahasa Indonesia berasal dari bahasa Belanda <em>zuurzak</em>, yang berarti "kantung asam" — merujuk pada rasa buahnya yang asam manis.</p>
+      </div>
+      <div class="fakta-item">
+        <div class="f-num">03</div>
+        <p>Satu buah sirsak mengandung lebih dari 20 vitamin dan mineral penting, termasuk Vitamin B1, B2, B3, B5, B6, C, Kalsium, Zat Besi, dan Magnesium.</p>
+      </div>
+      <div class="fakta-item">
+        <div class="f-num">04</div>
+        <p>Daun sirsak telah menjadi bahan penelitian intensif sejak tahun 1940-an. Para ilmuwan telah mengidentifikasi lebih dari 65 senyawa aktif unik di dalamnya.</p>
+      </div>
+      <div class="fakta-item">
+        <div class="f-num">05</div>
+        <p>Di berbagai negara Amerika Latin, sirsak dikenal sebagai <em>guanábana</em> dan merupakan bahan utama minuman tradisional yang sangat populer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-card reveal">
+    <div class="emoji">✏️</div>
+    <div class="name">Nazhyra Malikka Yusha Yahya</div>
+    <div class="kelas">Kelas 6A</div>
+  </div>
+  <p class="footer-copy">Tugas Pengenalan Tanaman · Pohon Sirsak</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
